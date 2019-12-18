@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>FogOS Edge Configuration/Utilization API</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <style>
+    .container-fluid {
+      padding: 60px 50px;
+    }
+    .bg-grey {
+      background-color: #f6f6f6;
+    }
+    #requirements_textbox {
+      height:300px;
+    }
+  </style>
+</head>
+
+<body>
+  {% include 'partials/header.html' %}
+
+  <div class="container-fluid">
+    <h2>FogOS: Edge Utilization - QoS Interpreter</h2>
+
+    {% if 'leave' in device_status %}
+      <hr />
+      <div class="row">
+        <label>Device Status: Not connected</label>
+        <form id="join_form" method="GET" action="/config/join">
+          <div class="form-group row">
+            <div class="col-xs-4"></div>
+            <div class="col-xs-4">
+              <button class="btn btn-primary" type="submit">Join FogOS Network</button>
+            </div>
+            <div class="col-xs-4"></div>
+          </div>
+        </form>
+      </div>
+    {% endif %}
+
+    {% if 'join' in device_status %}
+      <hr />
+      <div class="row">
+        <label>Device Status: Joined FogOS edge network</label>
+
+        <hr />
+        <h4>User/Service Description</h4>
+        
+        {% if not interpreted %}
+          <br />
+          <form id="qos_form" method="POST" action="/util/qos_interpretation">
+            <div class="form-group row">
+              <div class="col-xs-2">
+                Service Type:
+              </div>
+              <div class="col-xs-2">
+                <select id="service_type" name="service_type" class="form-control" form="qos_form">
+                  <option value="Any">Any</option>
+                  <option value="Streaming">Streaming</option>
+                  <option value="Web">Web</option>
+                  <option value="Voice">Voice</option>
+                  <option value="FileTransfer">FileTransfer</option>
+                  <option value="Game">Game</option>
+                  <option value="Image">Image</option>
+                  <option value="CPU">Computing-CPU</option>
+                  <option value="Storage">Computing-Storage</option>
+                  <option value="Bandwidth">Networking-Bandwidth</option>
+                  <option value="Sensor">Sensor</option>
+                </select>
+              </div>
+              <div class="col-xs-2">
+                Service Name:
+              </div>
+              <div class="col-xs-6">
+                <input type="text" name="service_name" class="form-control" form="qos_form" />
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-xs-1">
+                Requirements:
+              </div>
+              <div class="col-xs-12">
+                <textarea id="requirements_textarea" name="requirements" class="form-control" form="qos_form" placeholder='[{"category":"screen","type":"resolution","unit":"pixels","value":"720p"}]'></textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-xs-1">
+                Preferences:
+              </div>
+              <div class="col-xs-12">
+                <textarea id="preferences_textarea" name="preferences" class="form-control" form="qos_form" placeholder='["smooth_playback"]'></textarea>
+              </div>
+            </div>
+
+            <div class="form-group row">
+              <div class="col-xs-12">
+                <button class="btn btn-primary" type="submit">Interpret Description</button>
+              </div>
+            </div>
+          </form>
+        {% else %}
+
+          <div>
+            {{ input_desc }}
+          </div>
+
+          <hr />
+          <h4>QoS Interpretation Result</h4>
+          <div>
+            {{ output_result }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+</body>
+</html>

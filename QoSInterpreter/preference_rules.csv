@@ -1,0 +1,5 @@
+smooth_playback,bandwidth,any,multiply,1.2,1.5
+smooth_playback,delay,any,multiply,0.5,0.75
+smoothness,bandwidth,any,multiply,1.2,1.5
+smoothness,delay,any,multiply,0.5,0.75
+reliability,lossrate,any,min,0.01,0.02

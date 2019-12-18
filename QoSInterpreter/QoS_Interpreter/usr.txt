@@ -1,0 +1,1 @@
+{"ServiceType": "VoiceRecording", "UserContexts": [{"value": "N1bldg_rm823", "name": "Location"}, {"value": "(0.9, 0.26)", "name": "Position"}], "USRParameters": [{"value": "High", "name": "Performance"}, {"value": "Medium", "name": "Reliability"}]}

@@ -1,0 +1,2 @@
+videostreaming,bandwidth > 3 Mbps,delay < 150 ms,jitter < 10000 ms,lossrate < 1.0 none
+filetransfer,bandwidth > 0 bps,delay < 10000 ms,jitter < 10000 ms,lossrate < 0.01 none
