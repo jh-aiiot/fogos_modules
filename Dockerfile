@@ -1,2 +1,4 @@
 FROM alpine:3.7
-CMD python /dbclient.py
+COPY . /ResourceManager
+RUN make /ResourceManager
+CMD python /ResourceManager.py
