@@ -1,3 +1,3 @@
-FROM ubuntu: 18.04
+FROM alpine:3.7
 RUN make /dbclient
 CMD python /dbclient.py
